@@ -3,11 +3,10 @@
 --     user_id as customer_id,
 --     order_date,
 --     status
-
 -- from raw.jaffle_shop.orders
 
 -- instead of using database and schema again and again we will mention database name and schema name in sources.yml file
---  {{ source() }} this function will help to fetch data
+
 
 select
     id as order_id,
