@@ -4,8 +4,8 @@
         materialized='incremental',
         incremental_strategy='delete+insert',
         unique_key = 'order_id',
-        merge_update_columns = ['status','ORDER_NAME']
-        database='PC_DBT_DB'
+        merge_update_columns = ['status','ORDER_NAME'],
+        database='PC_DBT_DB',
         schema='DBT_TARGET'
     )
 }}
