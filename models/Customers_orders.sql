@@ -1,4 +1,4 @@
-with target_customers as (
+with customers as (
 
     select
         CUSTOMER_ID,
@@ -7,17 +7,22 @@ with target_customers as (
 	STATUS
 
     from {{source('Target_data','TARGET_CUSTOMER')}}
+    where STATUS = 'TRUE'
 
 ),
 
-target_orders as (
+orders as (
 
     select
         ORDER_ID,
         CUSTOMER_ID,
         ORDER_DATE,
         STATUS,
-	ORDER_N
+	ORDER_NAME
+
+    from {{source('Target_data','TARGET_ORDER')}}
+
+),
 
 customer_orders as (
 
@@ -28,26 +33,26 @@ customer_orders as (
         max(order_date) as most_recent_order_date,
         count(order_id) as number_of_orders
 
-    from {{source('Target_data','TARGET_ORDER')}}
+    from orders
 
-    group by customer_id
+    group by 1
 
 ),
 
-fact_order as (
+final as (
 
     select
-        target_customers.customer_id,
-        target_customers.first_name,
-        target_customers.last_name,
+        customers.customer_id,
+        customers.first_name,
+        customers.last_name,
         customer_orders.first_order_date,
         customer_orders.most_recent_order_date,
         coalesce(customer_orders.number_of_orders, 0) as number_of_orders
 
     from customers
 
-    left join Customers_Orders using (CUSTOMER_ID)
+    left join customer_orders using (customer_id)
 
 )
 
-select * from fact_order
+select * from final
