@@ -11,7 +11,7 @@
 }}
 SELECT
     
-    40000 + row_number() OVER (ORDER BY order_id) AS Id,
+    40000 + row_number() OVER (ORDER BY order_id) as order_id,
     status,
     ORDER_NAME
 FROM {{ ref("stg_orders") }}
