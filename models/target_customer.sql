@@ -1,15 +1,16 @@
-{{
-    config(
-        materialized='table',
-        database='PC_DBT_DB',
-        schema='DBT_TARGET'
-    )
-}}
+{{ config(materialized="table", database="PC_DBT_DB", schema="DBT_TARGET") }}
 
-WITH SNAPSHOT_TABLE AS (
-SELECT  30000+row_number() OVER (ORDER BY CUSTOMER_ID) AS customer_key ,* FROM {{ ref('stg_customer') }}
-)
-SELECT customer_key,CUSTOMER_ID,FIRST_NAME,LAST_NAME,DBT_VALID_FROM
-         AS EFFECTIVE_FROM ,DBT_VALID_TO AS EFFECTIVE_TO,
-         (CASE WHEN ST.DBT_VALID_TO IS NULL THEN 'TRUE' ELSE 'FALSE' END) AS STATUS
-          FROM SNAPSHOT_TABLE ST
+with
+    snapshot_table as (
+        select 30000 + row_number() over (order by customer_id) as customer_key, *
+        from {{ ref("stg_customer") }}
+    )
+select
+    customer_key,
+    customer_id,
+    first_name,
+    last_name,
+    dbt_valid_from as effective_from,
+    dbt_valid_to as effective_to,
+    (case when st.dbt_valid_to is null then 'TRUE' else 'FALSE' end) as status
+from snapshot_table st
