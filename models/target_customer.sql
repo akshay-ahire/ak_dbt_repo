@@ -7,7 +7,7 @@
 }}
 
 WITH SNAPSHOT_TABLE AS (
-SELECT  30000+row_number() OVER (ORDER BY CUSTOMER_ID) AS customer_key ,* FROM {{ ref('stg_customers') }}
+SELECT  30000+row_number() OVER (ORDER BY CUSTOMER_ID) AS customer_key ,* FROM {{ ref('stg_customer') }}
 )
 SELECT customer_key,CUSTOMER_ID,FIRST_NAME,LAST_NAME,DBT_VALID_FROM
          AS EFFECTIVE_FROM ,DBT_VALID_TO AS EFFECTIVE_TO,

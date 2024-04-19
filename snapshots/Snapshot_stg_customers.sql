@@ -1,4 +1,4 @@
-{% snapshot stg_customers %}
+{% snapshot stg_customer %}
 {{
     config(
       target_database='PC_DBT_DB',
@@ -8,8 +8,8 @@
       check_cols=["FIRST_NAME","LAST_NAME"]
     )
 }}
-select CUSTOMER_ID,FIRST_NAME,LAST_NAME
- from {{ source('Stage_data', 'stg_customers') }}
+select ID as CUSTOMER_ID,FIRST_NAME,LAST_NAME
+ from {{ source('jaffle_shop', 'customers') }}
 {% endsnapshot %}
 
 

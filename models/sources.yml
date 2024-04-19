@@ -11,11 +11,4 @@ sources:
           - name: orders
             description: One record per order. Includes cancelled and deleted orders.
       
-          
-    - name: Stage_data
-      description: This is a replica of the Postgres database used by our app
-      database: PC_DBT_DB
-      schema: DBT
-      tables:
-          - name: stg_customers
-            description: Names of customers
+

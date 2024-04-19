@@ -46,7 +46,7 @@ models:
       - name: first_order_date
         description: NULL when a customer has not yet placed an order.
 
-  - name: stg_customers
+  - name: stg_customer
     description: This model cleans up customer data
     columns:
       - name: customer_id
@@ -71,5 +71,5 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('stg_customers')
+              to: ref('stg_customer')
               field: customer_id
