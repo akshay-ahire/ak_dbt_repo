@@ -14,7 +14,7 @@ sources:
     - name: Target_data
       description: This is a data which is created after transformation which contains dimention tables
       database: PC_DBT_DB
-      schema: DBT_DBT_TARGET
+      schema: DBT_DBT_TARGET_DBT_TARGET
       tables:
           - name: TARGET_CUSTOMER
             description: One record per customer.
