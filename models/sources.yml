@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+    - name: jaffle_shop
+      description: This is a replica of the Postgres database used by our app
+      database: raw
+      schema: jaffle_shop
+      tables:
+          - name: customers
+            description: One record per customer.
+          - name: orders
+            description: One record per order. Includes cancelled and deleted orders.
+    
+    - name: Target_data
+      description: This is a data which is created after transformation which contains dimention tables
+      database: PC_DBT_DB
+      schema: DBT_DBT_TARGET
+      tables:
+          - name: TARGET_CUSTOMER
+            description: One record per customer.
+          - name: TARGET_ORDER
+            description: One record per order. Includes cancelled and deleted orders.
+      
+
+
+
