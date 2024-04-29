@@ -9,8 +9,5 @@ seeds:
         CountryCodeF:
           CountryCode2:
             column_types:
-            Name: varchar(60)
-            CountryCode: Number
-
-
-
+              Name: varchar(50)
+              CountryCode: Number
