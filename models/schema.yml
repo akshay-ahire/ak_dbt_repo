@@ -1,6 +1,14 @@
 version: 2
+snapshots:
+  - name: stg_customer
+    description: This model cleans up customer data
+    columns:
+      - name: customer_id
+        description: Primary key
+        tests:
+          - not_null
 
-models:
+models: 
   - name: customers
     description: One record per customer
     columns:
@@ -12,13 +20,6 @@ models:
       - name: first_order_date
         description: NULL when a customer has not yet placed an order.
 
-  - name: stg_customer
-    description: This model cleans up customer data
-    columns:
-      - name: customer_id
-        description: Primary key
-        tests:
-          - not_null
 
   - name: stg_orders
     description: This model cleans up order data

@@ -1,10 +1,4 @@
-{{
-    config(
-        materialized="table",
-        database="PC_DBT_DB",
-        schema="DBT_TARGET",
-    )
-}}
+{{ config(materialized="table", database="PC_DBT_DB", schema="DBT_TARGET_DBT_TARGET") }}
 with customers as (
 
     select
